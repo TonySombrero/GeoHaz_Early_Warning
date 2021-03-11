@@ -264,11 +264,11 @@ def Early_Warning():
     #        sender_email, receiver_email, message.as_string()
     #    )
 while 1: # Run forever
-    if getHash() != current_hash: # If nothing has changed
+    if getHash() != current_hash: # If Something has changed
         Early_Warning()
 
-    else: # If something has changed
-        Early_Warning()
-        #print("yay")
+    #else: # If something has changed
+    #    Early_Warning()
+    #    print("yay")
     time.sleep(sleeptime)
 
