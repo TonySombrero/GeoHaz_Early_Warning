@@ -250,8 +250,8 @@ while 1: # Run forever
 
     # Remnant else statement for testing 
 
-    #else: # If something has changed
-    #    Early_Warning()
-    #    print("yay")
+    #else: # If something has not changed
+        #Early_Warning()
+        #print("yay")
     time.sleep(sleeptime) # Sleeps the loop for 60 seconds before trying again
 
