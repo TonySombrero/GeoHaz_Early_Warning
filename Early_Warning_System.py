@@ -258,11 +258,11 @@ def Early_Warning():
 
     # Create secure connection with server and send email
     #context = ssl.create_default_context()     #context=context
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-        server.login(sender_email, password)
-        server.sendmail(
-            sender_email, receiver_email, message.as_string()
-        )
+    #with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+    #    server.login(sender_email, password)
+    #    server.sendmail(
+    #        sender_email, receiver_email, message.as_string()
+    #    )
 while 1: # Run forever
     if getHash() != current_hash: # If nothing has changed
         Early_Warning()
