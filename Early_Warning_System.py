@@ -265,7 +265,8 @@ def Early_Warning():
         )
 while 1: # Run forever
     if getHash() == current_hash: # If nothing has changed
-        
+        Early_Warning()
+        continue
     else: # If something has changed
         Early_Warning()
         break

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>PAAQ-4-qpgm3n</identifier>
+  <sender>ntwc@noaa.gov</sender>
+  <sent>2021-03-04T22:24:43-00:00</sent>
+  <status>Actual</status>
+  <msgType>Update</msgType>
+  <source>NTWC</source>
+  <scope>Public</scope>
+  <code>IPAWSv1.0</code>
+  <references>ntwc@noaa.gov,PAAQ-1-qpgm3n,null ntwc@noaa.gov,PAAQ-2-qpgm3n,2021-03-04T20:28:04-00:00 ntwc@noaa.gov,PAAQ-3-qpgm3n,2021-03-04T21:29:11-00:00</references>
+  <incidents>qpgm3n</incidents>
+  <info>
+    <category>Geo</category>
+    <event>Tsunami Information</event>
+    <responseType>None</responseType>
+    <urgency>Unknown</urgency>
+    <severity>Minor</severity>
+    <certainty>Unlikely</certainty>
+    <expires>2021-03-04T23:24:43-00:00</expires>
+    <senderName>NWS National Tsunami Warning Center Palmer AK</senderName>
+    <headline>This is a Tsunami Information Statement for Alaska, British Columbia, Washington, Oregon, and California. </headline>
+    <description>This is a Tsunami Information Statement for Alaska, British Columbia, Washington, Oregon, and California.  - Event details: Preliminary magnitude 8.1 (Mwp) earthquake / Lat: -29.600, Lon: -176.000 at 2021-03-04T19:28:35 UTC An information statement indicates that an earthquake has occurred, but does not pose a tsunami threat, or that a tsunami warning, advisory, or watch has been issued for another section of the ocean. </description>
+    <instruction>  There is no tsunami danger for the U.S. West Coast, British    Columbia, or Alaska.   Some of the areas listed above may experience non-damaging    sea level changes.   This will be the final U.S. National Tsunami Warning Center    message for this event unless additional information becomes    available. Refer to the internet site tsunami.gov for    more information. </instruction>
+    <web>http://ntwc.arh.noaa.gov/events/PAAQ/2021/03/04/qpgm3n/4/WEAK53/WEAK53.txt</web>
+    <parameter>
+      <valueName>EventLocationName</valueName>
+      <value>in the Kermadec Islands region, north of New Zealand</value>
+    </parameter>
+    <parameter>
+      <valueName>EventPreliminaryMagnitude</valueName>
+      <value>8.1</value>
+    </parameter>
+    <parameter>
+      <valueName>EventPreliminaryMagnitudeType</valueName>
+      <value>Mwp</value>
+    </parameter>
+    <parameter>
+      <valueName>EventOriginTime</valueName>
+      <value>2021-03-04T19:28:35-00:00</value>
+    </parameter>
+    <parameter>
+      <valueName>EventDepth</valueName>
+      <value>10 kilometers</value>
+    </parameter>
+    <parameter>
+      <valueName>EventLatLon</valueName>
+      <value>-29.600,-176.000 0.000</value>
+    </parameter>
+    <parameter>
+      <valueName>WEAK53</valueName>
+      <value>Public Tsunami Information Statements for AK, BC, and US West Coast</value>
+    </parameter>
+    <parameter>
+      <valueName>EAS-ORG</valueName>
+      <value>WXR</value>
+    </parameter>
+    <resource>
+      <resourceDesc>Energy Map</resourceDesc>
+      <mimeType>image/jpeg</mimeType>
+      <uri>http://ntwc.arh.noaa.gov/events/PAAQ/2021/03/04/qpgm3n/4/WEAK53/energyqpgm3n.jpg</uri>
+    </resource>
+    <resource>
+      <resourceDesc>Tsunami Travel Time Map</resourceDesc>
+      <mimeType>image/jpeg</mimeType>
+      <uri>http://ntwc.arh.noaa.gov/events/PAAQ/2021/03/04/qpgm3n/4/WEAK53/ttvuqpgm3n-04.jpg</uri>
+    </resource>
+    <resource>
+      <resourceDesc>Event Data as a JSON document</resourceDesc>
+      <mimeType>application/json</mimeType>
+      <uri>http://ntwc.arh.noaa.gov/events/PAAQ/2021/03/04/qpgm3n/4/WEAK53/PAAQ.json</uri>
+    </resource>
+    <area>
+      <areaDesc>in the Kermadec Islands region, north of New Zealand</areaDesc>
+      <circle>-29.6,-176.0 0.0</circle>
+    </area>
+  </info>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>z1HRrdflrP4nc6/qjcf2jNWa8WU=</DigestValue></Reference></SignedInfo><SignatureValue>g9wjXpCeIhI0uTUWm7Oz/LQYgqxrRZHk0aTl4fPcLh/ufA6hmpgeNg==</SignatureValue><KeyInfo><KeyValue><DSAKeyValue><P>/X9TgR11EilS30qcLuzk5/YRt1I870QAwx4/gLZRJmlFXUAiUftZPY1Y+r/F9bow9subVWzXgTuA&#13;
+HTRv8mZgt2uZUKWkn5/oBHsQIsJPu6nX/rfGG/g7V+fGqKYVDwT7g/bTxR7DAjVUE1oWkTL2dfOu&#13;
+K2HXKu/yIgMZndFIAcc=</P><Q>l2BQjxUjC8yykrmCouuEC/BYHPU=</Q><G>9+GghdabPd7LvKtcNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3&#13;
+zwkyjMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/hWuWfBpKL&#13;
+Zl6Ae1UlZAFMO/7PSSo=</G><Y>XonR3Yg1PO+Hpheh7NMm5UHT3amv+Z0OpCibPuHTwnyyfTUJQLaX249PGVvgM/CPS8MTN24lqbYx&#13;
+NI9dXJLAvIb16cW6eJx+kivl9ObemdndlUkM15quv7dN94sP5GF9RtppDXuq9BD/4lv3ya/TGxjX&#13;
+iMTf93pJwabei82X7Fs=</Y></DSAKeyValue></KeyValue></KeyInfo></Signature></alert>
