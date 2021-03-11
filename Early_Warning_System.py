@@ -82,16 +82,16 @@ def Early_Warning():
 
     south_africa = timezone('Africa/Johannesburg')
     sa_time = datetime.now(south_africa)
-    print (sa_time.strftime("%Y-%m-%dT%H:%M:%S"))
+    #print (sa_time.strftime("%Y-%m-%dT%H:%M:%S"))
 
     # datetime object containing current date and time
     now = datetime.now()
     
-    print("now =", now)
+    #print("now =", now)
 
     # dd/mm/YY H:M:S
     dt_string = now.strftime("%Y-%m-%dT%H:%M:%S")
-    print(dt_string)
+    #print(dt_string)
 
     #%% Obtaining the time the .xml file was sent
 
@@ -102,12 +102,12 @@ def Early_Warning():
 
     for elem in tree.iter(senttime[0]):
         senttime = (elem.text)
-        print(senttime)
+        #print(senttime)
 
     # Checking which time zone is needed
 
     Timezone = senttime[-5:]
-    print('Timezone : ', Timezone)
+    #print('Timezone : ', Timezone)
 
     # Have to check which time zone the time is in, to get the right time to compare it to! 
 
@@ -174,7 +174,7 @@ def Early_Warning():
         #risk = "Tsunami Risk"
         #print("Tsunami Risk")
 
-    print(message)
+    #print(message)
 
     #%% SMS Protocol
 
@@ -239,7 +239,7 @@ def Early_Warning():
     password = "GeoHaz1234"
 
     message = MIMEMultipart("alternative")
-    message["Subject"] = "multipart test"
+    message["Subject"] = "Early_Warning_Message"
     message["From"] = sender_email
     message["To"] = receiver_email
 
@@ -257,18 +257,18 @@ def Early_Warning():
     #message.attach(part2)
 
     # Create secure connection with server and send email
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+    #context = ssl.create_default_context()     #context=context
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
         server.login(sender_email, password)
         server.sendmail(
             sender_email, receiver_email, message.as_string()
         )
 while 1: # Run forever
-    if getHash() == current_hash: # If nothing has changed
+    if getHash() != current_hash: # If nothing has changed
         Early_Warning()
-        continue
+
     else: # If something has changed
         Early_Warning()
-        break
+        #print("yay")
     time.sleep(sleeptime)
 
