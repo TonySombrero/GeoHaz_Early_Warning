@@ -1,6 +1,16 @@
+# Early Warning System 
+# Anthony Semeraro
+# Mar 08, 2021
 
-# WebChange.py
-# Alerts you when a webpage has changed it's content by comparing checksums of the html.
+# *** Currently only operational for Tsunami Warnings and offshore earthquakes with potential for Tsunamis ***
+
+# Uses hash to check for updates to the Pacific US Tsunami Alert Site .xml deliverables, initiates Early Warning Function
+# if a change is detected. Auto updates every 60 seconds to stay up to date. 
+
+# Once Early Warning is initiated, the .xml file is read in, parsed for critical information, and dispersed to select 
+# phone numbers as SMS messages and emails containing more information. 
+
+# *** Email section is currently non-functional for use on Raspberry Pi ***
 
 import hashlib
 import urllib3
@@ -13,7 +23,6 @@ import requests
 import re
 
 # SMS Messaging Protocol
-import smtplib 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -75,43 +84,7 @@ def Early_Warning():
 
     iterator = tree.iter()
 
-    #%% Obtaining the Time the script is run
-
-    from datetime import datetime
-    from pytz import timezone    
-
-    south_africa = timezone('Africa/Johannesburg')
-    sa_time = datetime.now(south_africa)
-    #print (sa_time.strftime("%Y-%m-%dT%H:%M:%S"))
-
-    # datetime object containing current date and time
-    now = datetime.now()
-    
-    #print("now =", now)
-
-    # dd/mm/YY H:M:S
-    dt_string = now.strftime("%Y-%m-%dT%H:%M:%S")
-    #print(dt_string)
-
-    #%% Obtaining the time the .xml file was sent
-
-    for data in tree.iter():
-        sent = str(data) 
-        if 'sent' in sent:
-            senttime = sent.split("'")[1::2] 
-
-    for elem in tree.iter(senttime[0]):
-        senttime = (elem.text)
-        #print(senttime)
-
-    # Checking which time zone is needed
-
-    Timezone = senttime[-5:]
-    #print('Timezone : ', Timezone)
-
-    # Have to check which time zone the time is in, to get the right time to compare it to! 
-
-    #%% Parsing the .xml file
+    # Parsing the .xml file
 
     for data in tree.iter():
         info = str(data)
@@ -174,14 +147,16 @@ def Early_Warning():
         #risk = "Tsunami Risk"
         #print("Tsunami Risk")
 
-    #print(message)
-
     #%% SMS Protocol
+
+    # Dummy email account for use as security settings have to be reduced for this protocol as it is from an 
+    # unidentified developer (Anthony Semeraro)
 
     email = "tonysombrero2@gmail.com"
     pas = "GeoHaz1234"
 
     # SMS Gateways
+    # List of cell carrier email gateways for email -> text protocol
 
     # AT&T: [number]@txt.att.net
     # Sprint: [number]@messaging.sprintpcs.com or [number]@pm .sprint.com
@@ -197,10 +172,12 @@ def Early_Warning():
     #Anthony
     sms_gateway = '3155918481@txt.att.net'
 
+    # Other numbers to be added in with loop in future iterations
+    
     # Jenna Chauffer 
     #sms_gateway = '9284995693@vtext.com'
-
-    # Juans Number
+    
+    # Juan Carrillo
     #sms_gateway = '4259037094@tmomail.net'
 
     # The server we use to send emails in our case it will be gmail but every email provider has a different smtp 
@@ -214,7 +191,7 @@ def Early_Warning():
     # Now we need to login
     server.login(email,pas)
 
-    # Now we use the MIME module to structure our message.
+    # Use the MIME module to structure our message.
     msg = MIMEMultipart()
     msg['From'] = email
     msg['To'] = sms_gateway
@@ -256,6 +233,8 @@ def Early_Warning():
     message.attach(part1)
     #message.attach(part2)
 
+    # *** Need to figure out smtplib issues on raspberry pi for email section to work ***
+
     # Create secure connection with server and send email
     #context = ssl.create_default_context()     #context=context
     #with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
@@ -263,12 +242,16 @@ def Early_Warning():
     #    server.sendmail(
     #        sender_email, receiver_email, message.as_string()
     #    )
+
+
 while 1: # Run forever
-    if getHash() != current_hash: # If Something has changed
+    if getHash() != current_hash: # If the webpage has updated, initiate Early_Warning()
         Early_Warning()
+
+    # Remnant else statement for testing 
 
     #else: # If something has changed
     #    Early_Warning()
     #    print("yay")
-    time.sleep(sleeptime)
+    time.sleep(sleeptime) # Sleeps the loop for 60 seconds before trying again
 
