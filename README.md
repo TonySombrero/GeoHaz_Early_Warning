@@ -24,7 +24,11 @@ Ultimate goal of this program is to have it cycling constantly on a raspberry pi
 
 Update the section for sms protocols with your specific number and the code for the specific carrier. 
 
-Also update the email protocols, as well as use your own email to send the messages to your phone/email.
+Also update the email protocols, as well as use your own email to send the messages to your phone/email. 
+
+It is required to manually override blocks from unidentified developers for the email protocol for both sms and email messages to go through. 
+2 factor identification will also need to be manually removed, it is recommended to create a dummy email to use as the sending email to 
+prevent any security hacks with critical emails. 
 
 # Get Hash
 
