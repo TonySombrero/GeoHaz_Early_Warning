@@ -10,8 +10,6 @@
 # Once Early Warning is initiated, the .xml file is read in, parsed for critical information, and dispersed to select 
 # phone numbers as SMS messages and emails containing more information. 
 
-# *** Email section is currently non-functional for use on Raspberry Pi ***
-
 import hashlib
 import urllib3
 import random
@@ -152,8 +150,8 @@ def Early_Warning():
     # Dummy email account for use as security settings have to be reduced for this protocol as it is from an 
     # unidentified developer (Anthony Semeraro)
 
-    email = "tonysombrero2@gmail.com"
-    pas = "GeoHaz1234"
+    email = "your sending email for text protocol"
+    pas = "your sending email password for text protocol"
 
     # SMS Gateways
     # List of cell carrier email gateways for email -> text protocol
@@ -169,16 +167,7 @@ def Early_Warning():
     # U.S. Cellular: [number]@email.uscc.net
     # Virgin Mobile: [number]@vmobl.com
 
-    #Anthony
-    sms_gateway = '3155918481@txt.att.net'
-
-    # Other numbers to be added in with loop in future iterations
-    
-    # Jenna Chauffer 
-    #sms_gateway = '9284995693@vtext.com'
-    
-    # Juan Carrillo
-    #sms_gateway = '4259037094@tmomail.net'
+    sms_gateway = 'your number @carrieremailgateway.com'
 
     # The server we use to send emails in our case it will be gmail but every email provider has a different smtp 
     # and port is also provided by the email provider.
@@ -211,9 +200,9 @@ def Early_Warning():
 
     #%% Email Sending
 
-    sender_email = "tonysombrero2@gmail.com"
-    receiver_email = "anthony.semeraro2@gmail.com"
-    password = "GeoHaz1234"
+    sender_email = "your sending email here"
+    receiver_email = "your receiver email here"
+    password = "your sending email password here"
 
     message = MIMEMultipart("alternative")
     message["Subject"] = "Early_Warning_Message"
@@ -236,12 +225,12 @@ def Early_Warning():
     # *** Need to figure out smtplib issues on raspberry pi for email section to work ***
 
     # Create secure connection with server and send email
-    #context = ssl.create_default_context()     #context=context
-    #with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-    #    server.login(sender_email, password)
-    #    server.sendmail(
-    #        sender_email, receiver_email, message.as_string()
-    #    )
+    context = ssl.create_default_context()     #context=context
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(sender_email, password)
+        server.sendmail(
+            sender_email, receiver_email, message.as_string()
+        )
 
 
 while 1: # Run forever
