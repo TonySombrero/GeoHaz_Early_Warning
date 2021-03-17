@@ -236,6 +236,7 @@ def Early_Warning():
 while 1: # Run forever
     if getHash() != current_hash: # If the webpage has updated, initiate Early_Warning()
         Early_Warning()
+        del current_hash
 
     # Remnant else statement for testing 
 
