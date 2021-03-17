@@ -43,9 +43,7 @@ def getHash():
     randomint = random.randint(0,7)
 
     # User_Agents
-    # This helps skirt a bit around servers that detect repeaded requests from the same machine.
-    # This will not prevent your IP from getting banned but will help a bit by pretending to be different browsers
-    # and operating systems.
+    # Helps to keep ip address from being banned from the site you are monitoring. 
     user_agents = [
         'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11',
         'Opera/9.25 (Windows NT 5.1; U; en)',
@@ -138,12 +136,7 @@ def Early_Warning():
         message = message + value
         email_message = email_message + value 
 
-    #if "NO" in instructiontext:
-        #risk = "No Tsunami Risk"
-        #print("No Tsunami Risk")
-    #else:
-        #risk = "Tsunami Risk"
-        #print("Tsunami Risk")
+    # User inputs to filter warning messages. 
 
     #%% SMS Protocol
 
@@ -154,7 +147,6 @@ def Early_Warning():
     pas = "your sending email password for text protocol"
 
     # SMS Gateways
-    # List of cell carrier email gateways for email -> text protocol
 
     # AT&T: [number]@txt.att.net
     # Sprint: [number]@messaging.sprintpcs.com or [number]@pm .sprint.com
@@ -167,7 +159,7 @@ def Early_Warning():
     # U.S. Cellular: [number]@email.uscc.net
     # Virgin Mobile: [number]@vmobl.com
 
-    sms_gateway = 'your number @carrieremailgateway.com'
+    sms_gateway = 'yournumber@carrieremailgateway.com'
 
     # The server we use to send emails in our case it will be gmail but every email provider has a different smtp 
     # and port is also provided by the email provider.
@@ -175,9 +167,8 @@ def Early_Warning():
     port = 587
     # This will start our email server
     server = smtplib.SMTP(smtp,port)
-    # Starting the server
     server.starttls()
-    # Now we need to login
+    # Login to server
     server.login(email,pas)
 
     # Use the MIME module to structure our message.
@@ -201,8 +192,9 @@ def Early_Warning():
     #%% Email Sending
 
     sender_email = "your sending email here"
-    receiver_email = "your receiver email here"
     password = "your sending email password here"
+
+    receiver_email = "your receiver email here"
 
     message = MIMEMultipart("alternative")
     message["Subject"] = "Early_Warning_Message"
@@ -215,14 +207,11 @@ def Early_Warning():
 
     # Turn these into plain/html MIMEText objects
     part1 = MIMEText(text, "plain")
-    #part2 = MIMEText(html, "html")
 
     # Add HTML/plain-text parts to MIMEMultipart message
     # The email client will try to render the last part first
     message.attach(part1)
     #message.attach(part2)
-
-    # *** Need to figure out smtplib issues on raspberry pi for email section to work ***
 
     # Create secure connection with server and send email
     context = ssl.create_default_context()     #context=context
@@ -233,15 +222,9 @@ def Early_Warning():
         )
 
 
-while 1: # Run forever
+while 1: # Loop runs forever to continually check for updates (Tsunamis)
     if getHash() != current_hash: # If the webpage has updated, initiate Early_Warning()
         Early_Warning()
-        del current_hash
+        del current_hash # Deletes the current saved version of the webpage to start checking if it has updated again
 
-    # Remnant else statement for testing 
-
-    #else: # If something has not changed
-        #Early_Warning()
-        #print("yay")
     time.sleep(sleeptime) # Sleeps the loop for 60 seconds before trying again
-
