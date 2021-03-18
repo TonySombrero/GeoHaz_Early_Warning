@@ -10,27 +10,24 @@
 # Once Early Warning is initiated, the .xml file is read in, parsed for critical information, and dispersed to select 
 # phone numbers as SMS messages and emails containing more information. 
 
+# Get Hash
 import hashlib
 import urllib3
 import random
-import time
 
 # XML Parsing
 from xml.etree import cElementTree as ET
 import requests
 import re
 
-# SMS Messaging Protocol
+# SMS/Email Messaging Protocol
+import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 # Time
+import time
 from datetime import datetime
-
-# Email Messaging Protocol
-import smtplib, ssl
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 
 # url to be scraped
 url = 'https://www.tsunami.gov/events/xml/PAAQCAP.xml'
@@ -42,8 +39,7 @@ def getHash():
     # random integer to select user agent
     randomint = random.randint(0,7)
 
-    # User_Agents
-    # Helps to keep ip address from being banned from the site you are monitoring. 
+    # Fake operating systems and browsers to prevent ip address from being banned for requesting too much.  
     user_agents = [
         'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11',
         'Opera/9.25 (Windows NT 5.1; U; en)',
@@ -54,6 +50,8 @@ def getHash():
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:8.0.1) Gecko/20100101 Firefox/8.0.1',
         'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.151 Safari/535.19'
     ]
+
+    # Getting hash from the specified URL
 
     http = urllib3.PoolManager()
     request = http.request(
@@ -111,24 +109,19 @@ def Early_Warning():
     for elem in tree.iter(event[0]):
         eventtext = (elem.text)
         eventtext = eventtext + '\n'
-        #print(eventtext + '\n')
 
     for elem in tree.iter(description[0]):
         descriptiontext = (elem.text)
         desc = eventtext + '\n'
-        #print(descriptiontext + '\n')
 
     for elem in tree.iter(instruction[0]):
         instructiontext = (elem.text)
-        #print(instructiontext + '\n')
 
     for elem in tree.iter(areadesc[0]):
         areadesctext = (elem.text)
-        #print(areadesctext + '\n')
 
     for elem in tree.iter(location[0]):
         locationtext = (elem.text)
-        #print(locationtext + '\n')
 
     for elem in tree.iter(value[0]):
         value = (elem.text)
@@ -138,15 +131,15 @@ def Early_Warning():
 
     # User inputs to filter warning messages. 
 
-    #%% SMS Protocol
+    # SMS Protocol
 
-    # Dummy email account for use as security settings have to be reduced for this protocol as it is from an 
-    # unidentified developer (Anthony Semeraro)
+    # Each email provider has its own system for email to sms protocol, this program is set up for Gmail 
 
-    email = "your sending email for text protocol"
+    email = "sendingemail@gmail.com"
     pas = "your sending email password for text protocol"
 
     # SMS Gateways
+    # Use the email ending for your specific carrier
 
     # AT&T: [number]@txt.att.net
     # Sprint: [number]@messaging.sprintpcs.com or [number]@pm .sprint.com
@@ -165,7 +158,7 @@ def Early_Warning():
     # and port is also provided by the email provider.
     smtp = "smtp.gmail.com" 
     port = 587
-    # This will start our email server
+    # This will start the email server
     server = smtplib.SMTP(smtp,port)
     server.starttls()
     # Login to server
@@ -201,17 +194,15 @@ def Early_Warning():
     message["From"] = sender_email
     message["To"] = receiver_email
 
-    # Create the plain-text and HTML version of your message
+    # Create the plain-text version of your message
     text = email_message
-    #html = Tsunami.xml
 
-    # Turn these into plain/html MIMEText objects
+    # Turn these into plain text MIMEText objects
     part1 = MIMEText(text, "plain")
 
-    # Add HTML/plain-text parts to MIMEMultipart message
+    # Add plain-text parts to MIMEMultipart message
     # The email client will try to render the last part first
     message.attach(part1)
-    #message.attach(part2)
 
     # Create secure connection with server and send email
     context = ssl.create_default_context()     #context=context
