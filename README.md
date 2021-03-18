@@ -6,13 +6,15 @@
 
 ## Background
 
-Geologic Hazards pose great risk to infrastructure, ecosystems, and human life. Many of these events (Tsuanami, Volcano, Wildfire) will occur where relocation
+Geologic Hazards pose great risk to infrastructure, economics, and human life. Having an early warning system can help mitigate many of these risks by allowing infrasturcture to prepare (shutting off gas lines, stopping trains, etc) along with humans to react (initiate evacuation plans, grab essential items, etc).  
+
+Many of these events (Tsuanami, Volcano, Wildfire) will occur where relocation
 within a short time span is required to mitigate loss of life. Depending on your proximity to these hazards, minutes to even seconds can make the differenece 
 between life and death. Currently early warning systems in the US are in their infancy, or lack any ability to customize when you get an alert, or are located 
 on social media platforms. I wanted to have a more customizable early warning system that will send alerts directly to my phone as a text message that I can 
 change the parameters of what is sent. 
 
-Please subscribe to Government alerts on your phone and to tsunami twitter feeds for professional early warning alerts. 
+### Please subscribe to Government alerts on your phone and to tsunami twitter feeds for professional early warning alerts. 
 
 Currently this program only works for Tsunami .xml files from Tsunami.gov, but will be expanded soon for other geologic hazards. 
 
